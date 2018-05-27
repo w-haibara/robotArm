@@ -3,6 +3,7 @@ Servo servo1;
 Servo servo2;
 Servo servo3;
 Servo servo4;
+
 void setup() {
   // 制御信号を送る出力ピンの設定
   servo1.attach(6);
@@ -10,12 +11,17 @@ void setup() {
   servo3.attach(10);
   servo4.attach(11);
 }
+
 void loop() {
+  //１秒ごとにサーボを動かす
   servos(0,0,0,0);
   delay(1000);
   servos(180,180,180,180);
   delay(1000);
 }
+
+/* ４つのサーボの回転角
+をそれぞれ指定して動かす関数 */
 void servos(int servo1_angle,int servo2_angle,int servo3_angle,int servo4_angle){
   servo1.write(servo1_angle);
   servo2.write(servo2_angle);
