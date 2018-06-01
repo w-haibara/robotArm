@@ -25,6 +25,7 @@ void loop() {
   int penOff,r; /*ペンを下ろすときpenOff = 0
                   ペンを上げるときpenOff = 1 */
   r = sqrt(pow(x,2)+pow(y,2)); //極座標(r,s4)のrを定める
+  
   //ゼロ割りが起きる前にエラーを出す
   if(y!=0){
     s1 = asin(x/(2*l))*(180/PI); //s1を定義
