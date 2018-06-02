@@ -1,3 +1,9 @@
+/*
+OSOYOO製のLCDを使用しています．
+仕様については次は参照されたし
+http://osoyoo.com/2014/12/07/16x2-i2c-liquidcrystal-displaylcd/
+*/
+
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <Servo.h>
