@@ -2,6 +2,7 @@
 #include <LiquidCrystal_I2C.h>
 #include <Servo.h>
 #define l 10.0 //アームの長さ
+
 LiquidCrystal_I2C lcd(0x3f, 16, 2); //I2Cアドレスを指定
 Servo servo1;
 Servo servo2;
