@@ -14,7 +14,9 @@ Servo servo1;
 Servo servo2;
 Servo servo3;
 Servo servo4;
-int x, y; //ペン先の直行座標
+
+int x = 0; //ペン先の直行座標
+int y = 0;
 
 void setup() {
   lcd.init(); //LCDを初期化
@@ -27,7 +29,16 @@ void setup() {
 
   Serial.begin(9600);
 }
+
 void loop() {
+  if (Serial.available() > 0) {
+    String preX = Serial.readStringUntil(';');
+    x = preX.toInt();
+
+    String preY = Serial.readStringUntil(';');
+    y = preY.toInt();
+  }
+
   float s1, s2, s3, s4; //４つのサーボの回転角
   int penOff, r; /*ペンを下ろすときpenOff = 0
                   ペンを上げるときpenOff = 1 */
@@ -55,6 +66,10 @@ void servos(int servo1_angle, int servo2_angle, int servo3_angle, int servo4_ang
   servo2.write(servo2_angle);
   servo3.write(servo3_angle);
   servo4.write(servo4_angle);
+}
+
+void servoMove() {
+  //-------------
 }
 
 void servoLCD(float s1, float s2, float s3, float s4) {
