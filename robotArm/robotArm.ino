@@ -1,6 +1,6 @@
 /*
   OSOYOO製のLCDを使用しています．
-  仕様については次は参照されたし
+  仕様については次は参照されたしてください．
   http://osoyoo.com/2014/12/07/16x2-i2c-liquidcrystal-displaylcd/
 */
 #include <Wire.h>
@@ -35,14 +35,12 @@ void loop() {
                   ペンを上げるときpenOff = 1 */
   r = sqrt(pow(x, 2) + pow(y, 2)); //極座標(r,s4)のrを定める
 
-  //ゼロ割りが起きる前にエラーを出す
+  //ゼロ割りを回避する
   if (y != 0) {
     s1 = asin(x / (2 * l)) * (180 / PI); //s1を定義
     s2 = s1 * 2; //s2を定義
     s3 = s1; //s3を定義
     s4 = atan(x / y) * (180 / PI); //s4を定義
-  } else {
-    //print("ERROR! Make sure y and l are not ZERO");
   }
 
   servos(s1, s2, s3, s4); //サーボ４つまとめて動かす独自関数
@@ -67,15 +65,15 @@ void servoLCD(float s1, float s2, float s3, float s4) {
   lcd.backlight(); //LCDのバックライトをつける
   lcd.setCursor(0, 0); //LCDの１段目に表示
   lcd.print("(");
-  lcd.print(nf(2, x));
+  lcd.print(zeroPad(2, x));
   lcd.print(',');
-  lcd.print(nf(2, y));
+  lcd.print(zeroPad(2, y));
   lcd.print(")");
 
-  String sa = nf(3, round(s1 * 10));
-  String sb = nf(3, round(s2 * 10));
-  String sc = nf(3, round(s3 * 10));
-  String sd = nf(3, round(s4 * 10));
+  String sa = zeroPad(3, round(s1 * 10));
+  String sb = zeroPad(3, round(s2 * 10));
+  String sc = zeroPad(3, round(s3 * 10));
+  String sd = zeroPad(3, round(s4 * 10));
 
   lcd.setCursor(0, 1); //LCDの２段目に表示
   lcd.print(sa);
@@ -88,7 +86,7 @@ void servoLCD(float s1, float s2, float s3, float s4) {
 
 }
 
-String nf(int numLength, int num) {
+String zeroPad(int numLength, int num) {
   /* numをnumLength桁になるようにゼロ埋めしたString型の変数で返す関数
   */
   String NUM = String(num);
@@ -111,32 +109,3 @@ String nf(int numLength, int num) {
   }
   return (NUM);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
