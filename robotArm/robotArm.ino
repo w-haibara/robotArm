@@ -17,11 +17,14 @@ int x, y; //ペン先の直行座標
 
 void setup() {
   lcd.init(); //LCDを初期化
+
   // 制御信号を送る出力ピンの設定
   servo1.attach(6);
   servo2.attach(9);
   servo3.attach(10);
   servo4.attach(11);
+
+  Serial.begin(9600);
 }
 void loop() {
   x = random(15);
@@ -47,9 +50,11 @@ void loop() {
 
   delay(1000); //１秒間停止
 }
-/* ４つのサーボの回転角
-  をそれぞれ指定して動かす関数 */
+
 void servos(int servo1_angle, int servo2_angle, int servo3_angle, int servo4_angle) {
+  /* ４つのサーボの回転角
+     をそれぞれ指定して動かす関数
+  */
   servo1.write(servo1_angle);
   servo2.write(servo2_angle);
   servo3.write(servo3_angle);
@@ -57,7 +62,8 @@ void servos(int servo1_angle, int servo2_angle, int servo3_angle, int servo4_ang
 }
 
 void servoLCD(float s1, float s2, float s3, float s4) {
-
+  /* LCDに指定した座標とサーボの回転角を表示する関数
+  */
   lcd.backlight(); //LCDのバックライトをつける
   lcd.setCursor(0, 0); //LCDの１段目に表示
   lcd.print("(");
@@ -66,10 +72,10 @@ void servoLCD(float s1, float s2, float s3, float s4) {
   lcd.print(nf(2, y));
   lcd.print(")");
 
-  int sa = nf(2, round(s1 * 10));
-  int sb = nf(2, round(s2 * 10));
-  int sc = nf(2, round(s3 * 10));
-  int sd = nf(2, round(s4 * 10));
+  String sa = nf(3, round(s1 * 10));
+  String sb = nf(3, round(s2 * 10));
+  String sc = nf(3, round(s3 * 10));
+  String sd = nf(3, round(s4 * 10));
 
   lcd.setCursor(0, 1); //LCDの２段目に表示
   lcd.print(sa);
@@ -79,14 +85,58 @@ void servoLCD(float s1, float s2, float s3, float s4) {
   lcd.print(sc);
   lcd.print(':');
   lcd.print(sd);
+
 }
 
-int nf(int numLength, int num) {
-  //numをnumLength桁になるようにゼロ埋めする関数
-  /*
-  if (num <= pow(10, numLength-1)) {
-    num = (int)('0' + ((char)'num'));
-  } */
-  return (num);
+String nf(int numLength, int num) {
+  /* numをnumLength桁になるようにゼロ埋めしたString型の変数で返す関数
+  */
+  String NUM = String(num);
+  String zero = "0";
+  if (num == 0) {
+    for (int i = 2; i <= numLength; i++) {
+      zero.concat(NUM);
+      NUM = zero;
+      zero = "0";
+      Serial.print("|" + NUM + "," + i + "|");
+    }
+  } else {
+    for (int i = 1; i <= numLength; i++) {
+      if (num < pow(10, i - 1)) {
+        zero.concat(NUM);
+        NUM = zero;
+        zero = "0";
+      }
+    }
+  }
+  return (NUM);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
