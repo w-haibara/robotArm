@@ -1,6 +1,6 @@
 /*
   OSOYOO製のLCDを使用しています．
-  仕様については次は参照されたしてください．
+  仕様については次は参照してください．
   http://osoyoo.com/2014/12/07/16x2-i2c-liquidcrystal-displaylcd/
 */
 
