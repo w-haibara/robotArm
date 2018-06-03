@@ -1,6 +1,6 @@
 /*
 OSOYOO製のLCDを使用しています．
-仕様については次は参照されたし
+仕様については次は参照されたしてください．
 http://osoyoo.com/2014/12/07/16x2-i2c-liquidcrystal-displaylcd/
 */
 #include <Wire.h>

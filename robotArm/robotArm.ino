@@ -3,6 +3,7 @@
   仕様については次は参照されたしてください．
   http://osoyoo.com/2014/12/07/16x2-i2c-liquidcrystal-displaylcd/
 */
+
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 #include <Servo.h>
@@ -27,9 +28,6 @@ void setup() {
   Serial.begin(9600);
 }
 void loop() {
-  x = random(15);
-  y = random(15);
-
   float s1, s2, s3, s4; //４つのサーボの回転角
   int penOff, r; /*ペンを下ろすときpenOff = 0
                   ペンを上げるときpenOff = 1 */
@@ -96,7 +94,6 @@ String zeroPad(int numLength, int num) {
       zero.concat(NUM);
       NUM = zero;
       zero = "0";
-      Serial.print("|" + NUM + "," + i + "|");
     }
   } else {
     for (int i = 1; i <= numLength; i++) {
