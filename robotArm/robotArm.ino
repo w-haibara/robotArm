@@ -58,7 +58,6 @@ void servos(int servo1_angle, int servo2_angle, int servo3_angle, int servo4_ang
 
 void servoLCD(float s1, float s2, float s3, float s4) {
 
-
   lcd.backlight(); //LCDのバックライトをつける
   lcd.setCursor(0, 0); //LCDの１段目に表示
   lcd.print("(");
@@ -71,7 +70,6 @@ void servoLCD(float s1, float s2, float s3, float s4) {
   int sb = nf(2, round(s2 * 10));
   int sc = nf(2, round(s3 * 10));
   int sd = nf(2, round(s4 * 10));
-
 
   lcd.setCursor(0, 1); //LCDの２段目に表示
   lcd.print(sa);
