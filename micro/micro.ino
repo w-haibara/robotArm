@@ -18,6 +18,9 @@ Servo servo4;
 int x = 0; //ペン先の直行座標
 int y = 0;
 
+int i = 0;
+
+
 void setup() {
   lcd.init(); //LCDを初期化
 
@@ -51,24 +54,31 @@ void loop() {
   if (y == 0) {
     y = 1;
   }
-  s1 = asin(x / (2 * l)) * (180 / PI); //s1を定義
-  s2 = s1 * 2; //s2を定義
-  s3 = s1; //s3を定義
-  s4 = atan(x / y) * (180 / PI); //s4を定義
+
+  for (int ldd = 0; ldd < 10000; ldd++) {
+    delay(1);
+    int j = 2000 * (ldd/10000.0)*(ldd/10000.0);
+    servo1.writeMicroseconds(j);
+    servo2.writeMicroseconds(j);
+    servo3.writeMicroseconds(j);
+    servo4.writeMicroseconds(j);
+  }
+
+
 
   // servos(s1, s2, s3, s4); //サーボ４つまとめて動かす独自関数
-  servo1Move(oldS1, s1);
-  servo2Move(oldS2, s2);
-  servo3Move(oldS3, s3);
-  servo4Move(oldS4, s4);
+  /*  servo1Move(oldS1, s1);
+    servo2Move(oldS2, s2);
+    servo3Move(oldS3, s3);
+    servo4Move(oldS4, s4);
 
-  servoLCD(s1, s2, s3, s4); //s1,s2,s3,s4のそれぞれの値をLCDで表示する関数
+    servoLCD(s1, s2, s3, s4); //s1,s2,s3,s4のそれぞれの値をLCDで表示する関数
 
-  oldS1 = s1;
-  oldS2 = s2;
-  oldS3 = s3;
-  oldS4 = s4;
-  delay(1000); //１秒間停止
+    oldS1 = s1;
+    oldS2 = s2;
+    oldS3 = s3;
+    oldS4 = s4;
+    delay(1000); //１秒間停止*/
 }
 
 /*
